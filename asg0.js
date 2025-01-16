@@ -1,128 +1,128 @@
-let canvas, ctx;
+let canvasElement, drawingContext;
 function main(){
-    canvas = document.getElementById('example');
-    if(!canvas){
+    canvasElement = document.getElementById('example');
+    if(!canvasElement){
         console.log('Failed to retrieve the <canvas> element');
         return;
     }
 
-    ctx = canvas.getContext('2d');
-    if(!ctx){
+    drawingContext = canvasElement.getContext('2d');
+    if(!drawingContext){
         console.log('Failed to retrieve rendering context for canvas');
         return;
     }
 
-    ctx.fillStyle = 'black';
-    ctx.fillRect(0,0,400,400);
+    drawingContext.fillStyle = 'black';
+    drawingContext.fillRect(0,0,400,400);
 
-    const drawButton = document.getElementById('draw-button');
-    drawButton.addEventListener('click', handleDrawEvent);
+    const drawBtn = document.getElementById('draw-button');
+    drawBtn.addEventListener('click', handleDrawEvent);
 
-    const operationButton = document.getElementById('operation-button');
-    operationButton.addEventListener('click', handleDrawOperationEvent);
+    const operationBtn = document.getElementById('operation-button');
+    operationBtn.addEventListener('click', handleDrawOperationEvent);
 }
 
-function drawVector(v,color){
-    var originX = 400/2;
-    var originY = 400/2;
+function drawVector(vector, color){
+    var centerX = 400/2;
+    var centerY = 400/2;
 
-    var scaledX = v.elements[0] * 20;
-    var scaledY = v.elements[1] * 20;
+    var scaledX = vector.elements[0] * 20;
+    var scaledY = vector.elements[1] * 20;
 
-    ctx.beginPath();
-    ctx.moveTo(originX, originY);
-    ctx.lineTo(originX + scaledX, originY - scaledY);
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 2;
-    ctx.stroke();
+    drawingContext.beginPath();
+    drawingContext.moveTo(centerX, centerY);
+    drawingContext.lineTo(centerX + scaledX, centerY - scaledY);
+    drawingContext.strokeStyle = color;
+    drawingContext.lineWidth = 2;
+    drawingContext.stroke();
 }
 
 function handleDrawEvent(){
-    ctx.fillStyle = 'black';
-    ctx.fillRect(0,0,400,400);
+    drawingContext.fillStyle = 'black';
+    drawingContext.fillRect(0,0,400,400);
 
-    const x = parseFloat(document.getElementById('x-coordinate').value);
-    const y = parseFloat(document.getElementById('y-coordinate').value);
+    const coordX = parseFloat(document.getElementById('x-coordinate').value);
+    const coordY = parseFloat(document.getElementById('y-coordinate').value);
 
-    const x1 = parseFloat(document.getElementById('x-coordinate2').value);
-    const y1 = parseFloat(document.getElementById('y-coordinate2').value);
+    const coordX2 = parseFloat(document.getElementById('x-coordinate2').value);
+    const coordY2 = parseFloat(document.getElementById('y-coordinate2').value);
 
-    const v1 = new Vector3([x,y,0]);
-    const v2 = new Vector3([x1,y1,0]);
+    const vector1 = new Vector3([coordX, coordY, 0]);
+    const vector2 = new Vector3([coordX2, coordY2, 0]);
 
-    drawVector(v1, 'red');
-    drawVector(v2, 'blue');
+    drawVector(vector1, 'red');
+    drawVector(vector2, 'blue');
 }
 
 function handleDrawOperationEvent(){
-    ctx.fillStyle = 'black';
-    ctx.fillRect(0,0,400,400);
+    drawingContext.fillStyle = 'black';
+    drawingContext.fillRect(0,0,400,400);
 
-    const x = parseFloat(document.getElementById('x-coordinate').value);
-    const y = parseFloat(document.getElementById('y-coordinate').value);
+    const coordX = parseFloat(document.getElementById('x-coordinate').value);
+    const coordY = parseFloat(document.getElementById('y-coordinate').value);
 
-    const x1 = parseFloat(document.getElementById('x-coordinate2').value);
-    const y1 = parseFloat(document.getElementById('y-coordinate2').value);
+    const coordX2 = parseFloat(document.getElementById('x-coordinate2').value);
+    const coordY2 = parseFloat(document.getElementById('y-coordinate2').value);
 
-    const v1 = new Vector3([x,y,0]);
-    const v2 = new Vector3([x1,y1,0]);
+    const vector1 = new Vector3([coordX, coordY, 0]);
+    const vector2 = new Vector3([coordX2, coordY2, 0]);
 
-    drawVector(v1, 'red');
-    drawVector(v2, 'blue');
+    drawVector(vector1, 'red');
+    drawVector(vector2, 'blue');
 
-    const operation = document.getElementById('operation').value;
-    const scalar = parseFloat(document.getElementById('scalar').value);
+    const selectedOperation = document.getElementById('operation').value;
+    const scalarValue = parseFloat(document.getElementById('scalar').value);
 
-    let v3, v4;
+    let vectorResult1, vectorResult2;
 
-    if (operation === 'add') {
-        v3 = v1.add(v2);
-        drawVector(v3, 'green');
-    } else if (operation === 'sub') {
-        v3 = v1.sub(v2);
-        drawVector(v3, 'green');
-    } else if (operation === 'mul') {
-        v3 = v1.mul(scalar);
-        v4 = v2.mul(scalar);
-        drawVector(v3, 'green');
-        drawVector(v4, 'green');
-    } else if (operation === 'div') {
-        v3 = v1.div(scalar);
-        v4 = v2.div(scalar);
-        drawVector(v3, 'green');
-        drawVector(v4, 'green');
-    } else if (operation === 'mag') {
-        const mag1 = v1.magnitude();
-        const mag2 = v2.magnitude();
-        console.log(`Magnitude v1: ${mag1}`);
-        console.log(`Magnitude v2: ${mag2}`);
-    } else if (operation === 'norm') {
-        const norm1 = v1.normalize();
-        const norm2 = v2.normalize();
-        drawVector(norm1, 'green');
-        drawVector(norm2, 'green');
-    } else if (operation === 'angleBetween') {
-        const angle = angleBetween(v1, v2);
-    } else if (operation === 'area') {
-        const area = areaTriangle(v1, v2);
+    if (selectedOperation === 'add') {
+        vectorResult1 = vector1.add(vector2);
+        drawVector(vectorResult1, 'green');
+    } else if (selectedOperation === 'sub') {
+        vectorResult1 = vector1.sub(vector2);
+        drawVector(vectorResult1, 'green');
+    } else if (selectedOperation === 'mul') {
+        vectorResult1 = vector1.mul(scalarValue);
+        vectorResult2 = vector2.mul(scalarValue);
+        drawVector(vectorResult1, 'green');
+        drawVector(vectorResult2, 'green');
+    } else if (selectedOperation === 'div') {
+        vectorResult1 = vector1.div(scalarValue);
+        vectorResult2 = vector2.div(scalarValue);
+        drawVector(vectorResult1, 'green');
+        drawVector(vectorResult2, 'green');
+    } else if (selectedOperation === 'mag') {
+        const magnitude1 = vector1.magnitude();
+        const magnitude2 = vector2.magnitude();
+        console.log(`Magnitude vector1: ${magnitude1}`);
+        console.log(`Magnitude vector2: ${magnitude2}`);
+    } else if (selectedOperation === 'norm') {
+        const normalized1 = vector1.normalize();
+        const normalized2 = vector2.normalize();
+        drawVector(normalized1, 'green');
+        drawVector(normalized2, 'green');
+    } else if (selectedOperation === 'angleBetween') {
+        const angle = angleBetween(vector1, vector2);
+    } else if (selectedOperation === 'area') {
+        const area = areaTriangle(vector1, vector2);
     }
 }
 
-function angleBetween(v1, v2) {
-    const dotProduct = Vector3.dot(v1, v2);
-    const mag1 = v1.magnitude();
-    const mag2 = v2.magnitude();
-    const cosTheta = dotProduct / (mag1 * mag2);
+function angleBetween(vector1, vector2) {
+    const dotProduct = Vector3.dot(vector1, vector2);
+    const magnitude1 = vector1.magnitude();
+    const magnitude2 = vector2.magnitude();
+    const cosTheta = dotProduct / (magnitude1 * magnitude2);
     const angleRad = Math.acos(Math.max(-1, Math.min(1, cosTheta)));
     const angleDeg = angleRad * (180 / Math.PI);
     console.log(`Angle: ${angleDeg}`);
     return angleDeg;
 }
 
-function areaTriangle(v1, v2) {
-    const crossProd = Vector3.cross(v1, v2);
-    const magni = crossProd.magnitude();
-    const areaOfTriangle = magni / 2;
-    console.log(`Area: ${areaOfTriangle}`);
-    return areaOfTriangle;
+function areaTriangle(vector1, vector2) {
+    const crossProduct = Vector3.cross(vector1, vector2);
+    const magnitudeCross = crossProduct.magnitude();
+    const triangleArea = magnitudeCross / 2;
+    console.log(`Area: ${triangleArea}`);
+    return triangleArea;
 }
