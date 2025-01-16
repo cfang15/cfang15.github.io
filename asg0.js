@@ -1,6 +1,6 @@
 let myCanvas, myCtx;
 
-function initialize() {
+function main() {
     myCanvas = document.getElementById('example');
     if (!myCanvas) {
         console.log('Failed to retrieve the <canvas> element');
@@ -109,7 +109,6 @@ function onDrawOperationEvent() {
 
 function calculateAngleBetween(vectorA, vectorB) {
     const dotProductValue = Vector3.dot(vectorA, vectorB);
-
     const magValue1 = vectorA.magnitude();
     const magValue2 = vectorB.magnitude();
 
@@ -118,7 +117,6 @@ function calculateAngleBetween(vectorA, vectorB) {
     const angleInDegrees = angleInRadians * (180 / Math.PI);
 
     console.log(`Angle: ${angleInDegrees}`);
-
     return angleInDegrees;
 }
 
@@ -128,9 +126,5 @@ function calculateTriangleArea(vectorA, vectorB) {
     const triangleAreaValue = magnitudeValue / 2;
 
     console.log(`Area: ${triangleAreaValue}`);
-
     return triangleAreaValue;
-}
-
-    return areaOfTriangle;
 }
