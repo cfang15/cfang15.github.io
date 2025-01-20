@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Draw a point with a mouse click</title>
+  </head>
+
+  <body onload="main()">
+    <canvas id="webgl" width="400" height="400" class="brush-cursor">
+    Please use a browser that supports "canvas"
+    </canvas>
+    <style>
+        .brush-cursor {
+          cursor: crosshair; /* or 'url(path_to_brush_icon.png)', auto for custom */
+        }
+      </style>
+      <div id="info">
+        <h3>Student Info</h3>
+        <p><strong>Name:</strong> Chris Fang</p>
+        <p><strong>Email:</strong> cfang15@ucsc.edu</p>
+        <p><strong>Notes to grader:</strong> Changed Cursor when hovering over Canvas and also added background color</p>
+    </div>
+    <h2>Reference Image</h2>
+    <img src="tree.jpeg" width="400" height="400">
+    <p>
+    <p id="numdot" > XXX </p>
+    <button type = "button" id = "green" > Green </button>
+    <button type = "button" id = "red" > Red </button>  
+    <button type="button" id = "clearButton" > Clear </button>
+    <p>
+
+    <button type="button" id = "pointButton" > Point </button>
+    <button type="button" id = "triButton" > Triangle </button>
+    <button type="button" id = "circleButton" > Circle </button>
+    <button type="button" id = "treeButton" > Tree </button>
+
+    <p>
+    Red <input type ="range" min="0" max="100" value="100" class="slider" id="redSlide">
+    <p>
+    Green <input type ="range" min="0" max="100" value="100" class="slider" id="greenSlide">
+    <p>
+    Blue <input type ="range" min="0" max="100" value="100" class="slider" id="blueSlide">
+    <p>
+    Size <input type="range" min="5" max="40" value="0" class="slider" id="sizeSlide">
+    <p>
+        <label for="segmentsSlide">Segments:</label>
+        <input type="range" id="segmentsSlide" min="5" max="40" value="10" />
+    <p>
+        <p>Background Color: 
+            <input type="range" id="bgRed" min="0" max="255" value="0">
+            <input type="range" id="bgGreen" min="0" max="255" value="0">
+            <input type="range" id="bgBlue" min="0" max="255" value="0">
+          </p>
+
+
+
+    <script src="../ASGN1/lib/webgl-utils.js"></script>
+    <script src="../ASGN1/lib/webgl-debug.js"></script>
+    <script src="../ASGN1/lib/cuon-utils.js"></script>
+    <script src="Point.js"></script>
+    <script src="Triangle.js"></script>
+    <script src="Circle.js"></script>
+    <script src="Tree.js"></script>
+    <script src="asgn1.js"></script>
+    
+  </body>
+</html>
